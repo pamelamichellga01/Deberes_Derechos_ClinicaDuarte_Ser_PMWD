@@ -1,0 +1,239 @@
+
+html {
+    font-size: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+}
+
+/* Fondo de la pagina */
+body {
+    justify-content: center;
+    align-items: center;
+    background: url('https://media.istockphoto.com/id/1542757420/es/foto/pasillo-desenfocado-vac%C3%ADo.jpg?s=612x612&w=0&k=20&c=wyDhsCqJBvXFI94b2fFppi7Vt9e938UkCT-JRgsXS1E=') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    
+}
+
+/* Intro de logo */
+.intro {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background:url('https://media.istockphoto.com/id/1542757420/es/foto/pasillo-desenfocado-vac%C3%ADo.jpg?s=612x612&w=0&k=20&c=wyDhsCqJBvXFI94b2fFppi7Vt9e938UkCT-JRgsXS1E=') no-repeat center center;
+    background-size:cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 1s ease-in-out 1s forwards;
+}
+
+.intro-logo {
+    width: 160px;
+    animation: fadeIn 1.4s ease-out;
+}
+
+
+/* wrapper input-box index*/
+.wrapper {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  animation: showLogin 0.5s ease-in-out 1s forwards;
+  position: relative;
+  margin: auto;
+  width: 30rem;
+  background: rgba(255, 255, 255, 1);
+  padding: 2rem 2.5rem;
+  border-radius: 3rem;
+  box-shadow: 0 0 15px rgba(4, 118, 248, 0.953);
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.wrapper h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top:  0.8rem 0 0.5rem;;
+    line-height: 1.8rem;
+}
+
+.wrapper p {
+  font-size: 0.85rem;
+  color: #444343;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper .input-box {
+    width: 100%;
+    height: 3rem;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-box select,
+.input-box input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  background-color: white;
+  appearance: none; /* Oculta la flecha nativa del navegador */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-box i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.input-box select:focus,
+.input-box input:focus {
+  border-color: #007bff;
+}
+
+.remember-Password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #000;
+  margin-bottom: 1.3rem;
+  width: 75%; 
+  margin-left: auto;
+  margin-right: auto; 
+  
+}
+
+.btn {
+  width: 50%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2rem;
+  background: #0e6afd;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgb(25, 42, 59);
+}
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #000000;
+}
+
+.register-link a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.register-link a:hover { 
+    color: orange; 
+}
+
+.help-text {
+ font-size: 0.68rem;
+ color: #444343;
+ margin-bottom: 0.5rem;
+}
+
+
+/* Responsive para tablets */
+
+@media (max-width: 992px) {
+  .wrapper, .wrapper2 {
+    width: 80%;
+    padding: 1.5rem;
+  }
+  
+  .input-box i {
+    right: 4rem;
+  }
+}
+
+/* Responsive para telefonos */
+@media (max-width: 768px) {
+  .wrapper, .wrapper2 {
+    width: 90%;
+    padding: 1.2rem;
+    border-radius: 2rem;
+  }
+  
+  .logo img {
+    width: 70px;
+  }
+  
+  .input-box {
+    height: 2.8rem;
+  }
+  
+  .input-box i {
+    right: 3rem;
+  }
+  
+  .btn {
+    width: 70%;
+    padding: 0.7rem;
+  }
+}
+
+/* Animaciones index */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(3);
+  }
+}
+
+@keyframes showLogin {
+  to {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+
+

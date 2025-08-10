@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Medical Duarte</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assents/logo medical duarte.ico" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="intro">
+    <img src="./assents/logo medical duarte.png" alt="CMD Logo" class="intro-logo" />
+  </div>
+  <div class="wrapper">
+    <form id="userRegistrationForm">
+      <div class="logo">
+        <img src="./assents/imagotipo_cmd@4x.png" alt="Logo" width="200" />
+      </div>
+      <h2>Bienvenido al registro digital de la <br> Clínica Medical Duarte</h2>
+      <br>
+      <p>Por favor ingrese los siguientes datos para ingresar a la plataforma</p>
+      <div class="input-box">
+        <i class="bx bxs-user"></i>
+        <input type="text" id="nombreCompleto" placeholder="Nombre Completo" required>
+      </div>
+      <div class="input-box">
+        <select id="document-type" required>
+          <option value="">Selecciona un tipo</option>
+          <option value="CC">Cédula de Ciudadanía</option>
+          <option value="CE">Cédula de Extranjería</option>
+          <option value="TI">Tarjeta de Identidad</option>
+          <option value="PP">Pasaporte</option>
+          <option value="RC">Registro Civil</option>
+        </select>
+        <i class="bx bxs-id-card"></i>
+      </div>
+      <div class="input-box">
+        <i class='bx bxs-user-check'></i>
+        <input type="number" id="numeroDocumento" placeholder="N° de Documento" required>
+      </div>
+      <div class="input-box">
+        <i class="bx bxs-hotel"></i>
+        <input type="text" id="habitacion" placeholder="Habitación" required>
+      </div>
+      <div class="input-box">
+        <select id="hospital-services" required>
+          <option value="">Selecciona un servicio</option>
+          <optgroup label="Atención Crítica">
+            <option value="uci-adultos">UCI Adultos</option>
+            <option value="uci-neonatal">UCI Neonatal</option>
+            <option value="uci-pediatrica">UCI Pediátrica</option>
+            <option value="uci-coronaria">UCI Coronaria</option>
+          </optgroup>
+          <optgroup label="Servicios Quirúrgicos">
+            <option value="cirugia-cardiovascular">Cirugía Cardiovascular</option>
+            <option value="cirugia-hepatobiliar">Cirugía Hepatobiliar</option>
+            <option value="ortopedia">Ortopedia</option>
+            <option value="trasplante-renal">Trasplante Renal</option>
+            <option value="utph">UTPH (Unidad de Trasplante de Progenitores Hematopoyéticos)</option>
+          </optgroup>
+          <optgroup label="Servicios Médicos">
+            <option value="oncologia-integral">Oncología Integral</option>
+            <option value="radioterapia">Radioterapia</option>
+            <option value="braquiterapia">Braquiterapia</option>
+            <option value="hemodinamia">Hemodinamia</option>
+            <option value="medicina-nuclear">Medicina Nuclear</option>
+            <option value="cardiologia">Cardiología</option>
+            <option value="clinica-medica">Clínica Médica</option>
+            <option value="pie-diabetico">Cuidado y Tratamiento del Pie Diabético</option>
+            <option value="ginecobstetricia">Ginecobstetricia</option>
+          </optgroup>
+          <optgroup label="Apoyo Diagnóstico">
+            <option value="banco-sangre">Banco de Sangre</option>
+            <option value="laboratorio">Laboratorio Clínico y de Patología</option>
+            <option value="imagenes-diagnosticas">Imágenes Diagnósticas</option>
+          </optgroup>
+          <optgroup label="Servicios Adicionales">
+            <option value="sala-partos">Sala de Partos</option>
+            <option value="hospitalizacion">Hospitalización</option>
+            <option value="consulta-externa">Consulta Externa Especializada</option>
+          </optgroup>
+        </select>
+        <i class="bx bxs-clinic"></i>
+      </div>
+      <div class="remember-Password">
+        <label><input type="checkbox" id="recordarDatos"> Recordar</label>
+      </div>
+      <button type="submit" class="btn">Ingresar al panel</button>
+      <br><br>
+      <div class="help-text">
+        ¿Tienes problemas para ingresar? Por favor contacta con asistencia técnica lo más pronto posible.
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

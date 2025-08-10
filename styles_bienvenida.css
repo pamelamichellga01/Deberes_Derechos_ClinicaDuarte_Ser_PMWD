@@ -1,0 +1,231 @@
+html {
+    font-size: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+}
+
+/* Fondo de la pagina */
+body {
+    justify-content: center;
+    align-items: center;
+    background: url('https://media.istockphoto.com/id/1542757420/es/foto/pasillo-desenfocado-vac%C3%ADo.jpg?s=612x612&w=0&k=20&c=wyDhsCqJBvXFI94b2fFppi7Vt9e938UkCT-JRgsXS1E=') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    
+}
+
+.intro {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background:url('https://media.istockphoto.com/id/1542757420/es/foto/pasillo-desenfocado-vac%C3%ADo.jpg?s=612x612&w=0&k=20&c=wyDhsCqJBvXFI94b2fFppi7Vt9e938UkCT-JRgsXS1E=') no-repeat center center;
+    background-size:cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 1s ease-in-out 4s forwards;
+}
+
+.intro-logo {
+  width: 160px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 3s forwards;
+}
+
+/* wrapper bienvenida */
+.wrapper2 {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1000;
+  animation: hideLogin 1s ease-in-out 2s forwards;
+  position: relative;
+  margin: auto;
+  width: 30rem;
+  background: rgba(255, 255, 255, 1);
+  padding: 2rem 2.5rem;
+  border-radius: 3rem;
+  box-shadow: 0 0 15px rgba(4, 118, 248, 0.953);
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wrapper2 h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top:  0.8rem 0 0.5rem;;
+    line-height: 1.7rem;
+}
+
+.wrapper2 h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top:  0.8rem 0 0.5rem;;
+    line-height: 3.5rem;
+}
+    
+.wrapper2 p {
+  font-size: 0.85rem;
+  color: #444343;
+  margin-bottom: 0.5rem;
+}
+
+.text{
+  font-size: 0.85rem;
+  color: #444343;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para el avatar circular */
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #0e6afd, #43a5eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  box-shadow: 0 4px 15px rgba(14, 106, 253, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.avatar-circle span {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación del avatar */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(14, 106, 253, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(14, 106, 253, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(14, 106, 253, 0.3);
+  }
+}
+
+/* Resaltar el nombre del usuario */
+#nombreUsuario {
+  color: #0e6afd;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive para tablets */
+
+@media (max-width: 992px) {
+  .wrapper, .wrapper2 {
+    width: 80%;
+    padding: 1.5rem;
+  }
+  
+  .input-box i {
+    right: 4rem;
+  }
+  
+  .avatar-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .avatar-circle span {
+    font-size: 1.5rem;
+  }
+}
+
+/* Responsive para telefonos */
+@media (max-width: 768px) {
+  .wrapper, .wrapper2 {
+    width: 90%;
+    padding: 1.2rem;
+    border-radius: 2rem;
+  }
+  
+  .logo img {
+    width: 70px;
+  }
+  
+  .input-box {
+    height: 2.8rem;
+  }
+  
+  .input-box i {
+    right: 3rem;
+  }
+  
+  .btn {
+    width: 70%;
+    padding: 0.7rem;
+  }
+  
+  .wrapper2 h1 {
+    font-size: 1.7rem;
+  }
+  
+  .wrapper2 h2 {
+    font-size: 1.7rem;
+  }
+  
+  .avatar-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .avatar-circle span {
+    font-size: 1.3rem;
+  }
+}
+
+/* Animaciones index */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(3);
+  }
+}
+
+@keyframes showLogin {
+  to {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+/* Animaciones bienvenida */
+
+@keyframes hideLogin {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

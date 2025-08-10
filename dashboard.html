@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica Medical Duarte</title>
+    <link rel="stylesheet" href="styles_dashboard.css" />
+    <link rel="icon" href="assents/logo medical duarte.ico" />
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle" style="display: none;">
+
+    <nav class="mini-menu">
+        <div class="user-info-section">
+            <div class="user-avatar-menu">
+                <span id="inicialesMenu">U</span>
+            </div>
+            <h4 id="nombreUsuarioMenu">Usuario</h4>
+            <div class="user-details">
+                <p><i class="bx bx-id-card"></i> <span id="documentoInfo">Sin documento</span></p>
+                <p><i class="bx bx-hotel"></i> <span id="habitacionInfo">Sin habitación</span></p>
+                <p><i class="bx bx-clinic"></i> <span id="servicioInfo">Sin servicio</span></p>
+                <p><i class="bx bx-calendar"></i> <span id="datetime"></span></p>
+            </div>
+        </div>
+        <hr class="menu-divider">
+        <a href="index.html" class="menu-option logout-option" onclick="cerrarSesion()">
+            <i class="bx bx-log-out"></i>
+            Cerrar sesión
+        </a>
+    </nav>
+
+    <header>
+        <div class="encabezado">
+            <div class="marco-icono">
+                <img src="/assents/imagotipo_cmd@4x.png" alt="Logo" width="300px">
+            </div>
+            <label for="menu-toggle" class="imagen" style="cursor: pointer;">
+                <div id="avatarHeader" class="header-avatar">
+                    <span id="inicialesHeader">U</span>
+                </div>
+            </label>
+        </div>
+    </header>
+
+    <hr>
+
+    <div class="accesos-rapidos">
+        <a href="../formularios/derechos.html" class="acceso-btn">JUEGO 1</a>
+        <a href="../formularios/deberes.html" class="acceso-btn">JUEGO 2</a>
+        <a href="http://clinicamedicalduarte.com/" class="acceso-btn">JUEGO 3</a>
+        <a href="https://maps.app.goo.gl/BnLxNBFWANLkdeVQ6" class="acceso-btn">JUEGO 4</a>
+    </div>
+
+    <div class="contenido-principal">
+        <div class="bienvenida">
+            <h2>Bienvenido a Clínica Medical Duarte</h2>
+            <p><strong>"Trabajamos con sentido humano"</strong></p>
+            <p>Nos dedicamos a brindar atención médica integral de calidad, priorizando el bienestar y la dignidad de cada paciente. Conoce tus derechos y deberes como paciente para una mejor experiencia en nuestra clínica.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
