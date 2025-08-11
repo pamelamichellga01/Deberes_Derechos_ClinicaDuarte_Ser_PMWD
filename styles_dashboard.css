@@ -93,21 +93,42 @@ body {
 }
 
 
+/* Sección de Juegos */
+.juegos-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  margin-top: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.juegos-descripcion {
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
 .accesos-rapidos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin: 40px 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin: 0;
 }
 
 .acceso-btn {
-  display: block;   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   background: rgba(255, 255, 255, 0.95);
   color: #0051ff;
   text-decoration: none;
-  padding: 25px 20px;
-  border-radius: 15px;
+  padding: 30px 20px;
+  border-radius: 20px;
   font-weight: 600;
   font-size: 1.1em;
   transition: all 0.3s ease;
@@ -115,6 +136,8 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
+  min-height: 200px;
+  justify-content: center;
 }
 .acceso-btn::before {
   content: '';
@@ -134,11 +157,34 @@ body {
   opacity: 1;
 }
 
+.juego-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.acceso-btn h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.acceso-btn p {
+  margin: 0;
+  font-size: 0.95em;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
 .acceso-btn:hover {
   background: linear-gradient(45deg, #43a5eb, #0051ff);
   color: white;
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 8px 25px rgba(0, 81, 255, 0.3);
+}
+
+.acceso-btn:hover .juego-icon {
+  transform: scale(1.1);
 }
 
 /* Mini Menu Mejorado */

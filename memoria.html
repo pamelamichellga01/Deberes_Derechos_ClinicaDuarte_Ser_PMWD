@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria - Clínica Medical Duarte</title>
+    <link rel="stylesheet" href="memoria-styles.css">
+    <link rel="icon" href="assents/logo medical duarte - Editado.png">
+</head>
+<body>
+    <div class="btn-salir">
+        <a href="dashboard.html" class="salir-btn">✕ Volver al Dashboard</a>
+    </div>
+    
+    <div id="controls">
+        <button onclick="startGame('derechos')">Jugar con Derechos</button>
+        <button onclick="startGame('deberes')">Jugar con Deberes</button>
+        <button id="btn-reiniciar" type="button">Reiniciar</button>
+    </div>
+    
+    <div id="stats">0 intentos</div>
+    
+    <div id="wrapper">
+        <div id="game"></div>
+    </div>
+    
+    <script src="memoria-script.js"></script>
+</body>
+</html> 
