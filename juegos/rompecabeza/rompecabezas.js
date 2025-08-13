@@ -9,8 +9,8 @@ const gameConfig = {
     board: [],
     // Imagenes
     imagenes: [
-        'IMG/imagen (1).jpg',
-        'IMG/imagen (2).png',
+        'https://previews.123rf.com/images/microbagrandioza/microbagrandioza1803/microbagrandioza180300001/96716326-hospital-building-concept-with-doctor-character-vector-flat-cartoon-illustration.jpg',
+        'https://img.freepik.com/vector-premium/dibujos-animados-oficina-medicos-paciente_18591-19420.jpg',
         'https://img.freepik.com/vector-premium/caricatura-medico-cruz-roja-pecho_1025830-97821.jpg'
     ],
     imagenSeleccionada: 0,
