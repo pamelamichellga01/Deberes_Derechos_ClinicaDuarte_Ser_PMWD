@@ -11,7 +11,7 @@ const gameConfig = {
     imagenes: [
         'IMG/imagen (1).jpg',
         'IMG/imagen (2).png',
-        'IMG/imagen (1).png'
+        'https://img.freepik.com/vector-premium/caricatura-medico-cruz-roja-pecho_1025830-97821.jpg'
     ],
     imagenSeleccionada: 0,
     imagen: null,
