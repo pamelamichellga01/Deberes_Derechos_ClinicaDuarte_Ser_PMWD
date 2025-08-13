@@ -100,9 +100,6 @@ function mostrarResultadoFinal() {
                 <button class="accion-btn" onclick="reiniciarQuiz()">
                     <i class="bx bx-refresh"></i> Intentar de nuevo
                 </button>
-                <a href="dashboard.html" class="accion-btn secundario">
-                    <i class="bx bx-home"></i> Volver al Dashboard
-                </a>
             </div>
         </div>
     `;
