@@ -113,11 +113,18 @@ body {
 }
 
 .accesos-rapidos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Siempre 5 columnas en pantallas grandes */
+    gap: 25px;
+    margin: 0;
 }
+
+@media (max-width: 992px) {
+    .accesos-rapidos {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 
 .acceso-btn {
   display: flex;

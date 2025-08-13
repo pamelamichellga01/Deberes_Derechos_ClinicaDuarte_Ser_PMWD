@@ -76,11 +76,11 @@
 }
 
 /* Frente de la tarjeta */
-.front {
-    background-color: #fff;
-    z-index: 2;
-    border: 2px solid rgba(0, 81, 255, 0.1);
-    transform: rotateY(0deg);
+.front img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;        
+    background-color: white;    
 }
 
 .front img {

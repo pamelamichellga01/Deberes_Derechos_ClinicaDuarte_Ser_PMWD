@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactivo - Clínica Medical Duarte</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="marco-icono">
+            <img src="/../assents/imagotipo_cmd@4x.png" alt="Logo" style="width:250px; height:auto;">
+        </div>
+        <a href="/../dashboard.html" class="volver-btn">
+            <i class="bx bx-arrow-back"></i>
+            Volver al Dashboard
+        </a>
+    </header>
+
+    <div class="juego-container">
+        <h1 class="titulo-juego">Quiz Interactivo de Derechos y Deberes</h1>
+        
+        <div class="progreso-container">
+            <div class="progreso-barra">
+                <div class="progreso-fill" id="progresoFill" style="width: 10%"></div>
+            </div>
+            <div class="progreso-texto" id="progresoTexto">Pregunta 1 de 10</div>
+        </div>
+
+        <div class="pregunta-card" id="preguntaCard">
+            <div class="pregunta-icono">❓</div>
+            <div class="pregunta-texto" id="preguntaTexto"></div>
+            <div class="opciones-container" id="opcionesContainer"></div>
+            <div class="feedback-message" id="feedbackMessage"></div>
+            <button class="siguiente-btn" id="siguienteBtn" disabled>
+                Siguiente <i class="bx bx-right-arrow-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

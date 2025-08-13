@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Clasificación: Derechos vs Deberes - Clínica Medical Duarte</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="clasifica.css" />
+</head>
+<body>
+
+    <header class="game-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class='bx bx-clinic'></i>
+                </div>
+                <div class="logo-text">Clínica Medical Duarte</div>
+            </div>
+            <a href="#" class="back-btn" onclick="volverAlDashboard()">
+                <i class='bx bx-arrow-back'></i>
+                Volver al Dashboard
+            </a>
+        </div>
+    </header>
+
+    <div class="game-container">
+        <div class="game-title fade-in">
+            <h1>Clasificación: Derechos vs Deberes</h1>
+            <p>Arrastra cada concepto a la categoría correcta según los conocimientos adquiridos</p>
+        </div>
+
+        <div class="stats-panel fade-in">
+            <div class="stat-item">
+                <span class="stat-number" id="score">0</span>
+                <span class="stat-label">Puntos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="correctCount">0</span>
+                <span class="stat-label">Correctas</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="totalCount">16</span>
+                <span class="stat-label">Total</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="accuracy">0%</span>
+                <span class="stat-label">Precisión</span>
+            </div>
+        </div>
+
+        <div class="game-board fade-in">
+
+            <div class="drop-zone" id="derechos-zone" data-type="derechos">
+                <div class="zone-header derechos-header">
+                    <h2 class="zone-title"><i class='bx bx-shield-check'></i> Derechos</h2>
+                    <p class="zone-subtitle">Lo que puedes exigir como paciente</p>
+                </div>
+                <div id="derechos-cards" class="dropped-cards"></div>
+            </div>
+
+            <div class="cards-area">
+                <h3 class="cards-title">
+                    <i class='bx bx-collection'></i> 
+                    Arrastra los conceptos
+                </h3>
+                <div id="cards-container" class="cards-container"></div>
+            </div>
+
+            <div class="drop-zone" id="deberes-zone" data-type="deberes">
+                <div class="zone-header deberes-header">
+                    <h2 class="zone-title"><i class='bx bx-task'></i> Deberes</h2>
+                    <p class="zone-subtitle">Tus responsabilidades como paciente</p>
+                </div>
+                <div id="deberes-cards" class="dropped-cards"></div>
+            </div>
+        </div>
+
+        <div class="game-controls fade-in">
+            <button class="control-btn" onclick="verificarResultados()">
+                <i class='bx bx-check-circle'></i> Verificar Respuestas
+            </button>
+            <button class="control-btn secondary" onclick="reiniciarJuego()">
+                <i class='bx bx-reset'></i> Reiniciar
+            </button>
+            <button class="control-btn secondary" onclick="mostrarAyuda()">
+                <i class='bx bx-help-circle'></i> Ayuda
+            </button>
+        </div>
+    </div>
+
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">¡Excelente trabajo!</h2>
+            <p id="modalMessage">Has completado el ejercicio correctamente.</p>
+            <div class="game-controls">
+                <button class="control-btn" onclick="cerrarModal()">
+                    <i class='bx bx-x'></i> Cerrar
+                </button>
+                <button class="control-btn secondary" onclick="reiniciarJuego(); cerrarModal();">
+                    <i class='bx bx-reset'></i> Jugar de nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="clasifica.js"></script>
+</body>
+</html>
