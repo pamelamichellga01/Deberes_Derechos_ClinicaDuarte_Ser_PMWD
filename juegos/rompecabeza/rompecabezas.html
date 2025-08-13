@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rompecabezas Educativo - Clínica Medical Duarte</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="rompecabezas.css">
+</head>
+<body>
+    <!-- Header -->
+   <header class="game-header">
+    <div class="header-content">
+        <div class="logo-section">
+            <div class="marco-icono">
+                <img src="/../assents/imagotipo_cmd@4x.png" alt="Logo Clínica Medical Duarte">
+            </div>
+        </div>
+        <a href="/../dashboard.html" class="back-btn">
+            <i class="bx bx-arrow-back"></i>
+            <span>Volver al Dashboard</span>
+        </a>
+    </div>
+</header>   
+
+    <!-- Container principal -->
+    <div class="game-container">
+        <!-- Título del juego -->
+        <div class="game-title fade-in">
+            <h1>Rompecabezas Educativo</h1>
+            <p>Arma el rompecabezas para conocer más sobre la Clínica Medical Duarte</p>
+        </div>
+
+        <!-- Panel de estadísticas -->
+        <div class="stats-panel fade-in">
+            <div class="stat-item">
+                <span class="stat-number" id="movimientos">0</span>
+                <span class="stat-label">Movimientos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="tiempo">00:00</span>
+                <span class="stat-label">Tiempo</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="puntuacion">0</span>
+                <span class="stat-label">Puntos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="progreso">0%</span>
+                <span class="stat-label">Progreso</span>
+            </div>
+        </div>
+
+        <!-- Área principal del juego -->
+        <div class="puzzle-area fade-in">
+            <!-- Panel de selección de imagen -->
+            <div class="image-selector">
+                <h3><i class='bx bx-image'></i> Selecciona una imagen</h3>
+                <img id="imagePreview" class="image-preview" src="" alt="Vista previa">
+                <div class="image-controls">
+                    <button class="image-btn active" onclick="seleccionarImagen(0)">Clínica</button>
+                    <button class="image-btn" onclick="seleccionarImagen(1)">Servicios</button>
+                    <button class="image-btn" onclick="seleccionarImagen(2)">Equipo</button>
+                </div>
+            </div>
+
+            <!-- Canvas del rompecabezas -->
+            <div class="puzzle-canvas-container">
+                <h3><i class='bx bx-puzzle'></i> Rompecabezas</h3>
+                <canvas id="puzzleCanvas" width="350" height="350"></canvas>
+                <div class="timer-display" id="timerDisplay">¡Haz clic para comenzar!</div>
+            </div>
+
+            <!-- Panel de información -->
+            <div class="info-panel">
+                <h3><i class='bx bx-cog'></i> Configuración</h3>
+                
+                <div class="difficulty-selector">
+                    <label for="dificultad">Nivel de dificultad:</label>
+                    <select id="dificultad" onchange="cambiarDificultad()">
+                        <option value="3">Fácil (3x3)</option>
+                        <option value="4" selected>Medio (4x4)</option>
+                        <option value="5">Difícil (5x5)</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Controles del juego -->
+        <div class="game-controls fade-in">
+            <button class="control-btn success" onclick="iniciarJuego()">
+                <i class='bx bx-play'></i>
+                Nuevo Juego
+            </button>
+            <button class="control-btn secondary" onclick="mezclarPiezas()">
+                <i class='bx bx-shuffle'></i>
+                Mezclar
+            </button>
+            <button class="control-btn secondary" onclick="mostrarSolucion()">
+                <i class='bx bx-show'></i>
+                Ver Solución
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de resultados -->
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">¡Felicitaciones!</h2>
+            <p id="modalMessage">Has completado el rompecabezas exitosamente.</p>
+            <div class="game-controls">
+                <button class="control-btn" onclick="cerrarModal()">
+                    <i class='bx bx-x'></i>
+                    Cerrar
+                </button>
+                <button class="control-btn success" onclick="iniciarJuego(); cerrarModal();">
+                    <i class='bx bx-play'></i>
+                    Jugar de Nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="rompecabezas.js"></script>
+</body>
+</html>

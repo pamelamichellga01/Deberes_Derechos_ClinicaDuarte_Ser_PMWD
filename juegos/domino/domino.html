@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominó Educativo - Clínica Medical Duarte</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(190deg, #ffffff 5%, #78b7f6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .encabezado {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            height: 68px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .marco-icono img {
+            height: 50px;
+            margin: 0 18px;
+        }
+
+        .volver-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(45deg, #0051ff, #43a5eb);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 81, 255, 0.2);
+        }
+
+        .volver-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 81, 255, 0.3);
+        }
+
+        /* Contenedor principal */
+        .game-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .titulo-juego {
+            text-align: center;
+            color: #0051ff;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 81, 255, 0.1);
+        }
+
+        /* Panel de instrucciones */
+        .instrucciones-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .instrucciones-panel.visible {
+            display: block;
+        }
+
+        .instrucciones-titulo {
+            color: #0051ff;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .instrucciones-lista {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instrucciones-lista li {
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instrucciones-lista li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Área de juego */
+        .juego-area {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .estado-juego {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: linear-gradient(45deg, #0051ff, #43a5eb);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .jugador-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .puntuacion {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+
+        /* Mesa de juego */
+        .mesa {
+            background: linear-gradient(45deg, #1a5f2e, #2d7a3d);
+            border: 5px solid #8B4513;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .mesa:before {
+            content: "MESA DE JUEGO";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Fichas */
+        .ficha {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 2px solid #333;
+            border-radius: 10px;
+            width: 60px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ficha:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 81, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border-color: #0051ff;
+        }
+
+        .ficha.jugable {
+            animation: pulse 2s infinite;
+            border-color: #28a745;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4); }
+            50% { box-shadow: 0 6px 12px rgba(40, 167, 69, 0.6); }
+            100% { box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4); }
+        }
+
+        .lado {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 50%;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            position: relative;
+        }
+
+        .lado:first-child {
+            border-bottom: 1px solid #333;
+        }
+
+        /* Puntos del dominó */
+        .puntos {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            gap: 2px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .puntos[data-valor="0"] { grid-template: none; }
+        .puntos[data-valor="1"] { grid-template: 1fr / 1fr; }
+        .puntos[data-valor="2"] { grid-template: 1fr 1fr / 1fr; }
+        .puntos[data-valor="3"] { grid-template: 1fr 1fr 1fr / 1fr; }
+        .puntos[data-valor="4"] { grid-template: 1fr 1fr / 1fr 1fr; }
+        .puntos[data-valor="5"] { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
+        .puntos[data-valor="6"] { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
+
+        .punto {
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        /* Área de fichas del jugador */
+        .fichas-jugador {
+            background: rgba(240, 248, 255, 0.8);
+            border: 2px dashed #0051ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .fichas-titulo {
+            color: #0051ff;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .fichas-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            min-height: 140px;
+            align-items: center;
+        }
+
+        .fichas-container:empty:before {
+            content: "¡Has usado todas tus fichas!";
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Controles */
+        .controles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primario {
+            background: linear-gradient(45deg, #0051ff, #43a5eb);
+            color: white;
+        }
+
+        .btn-secundario {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ffc107, #ff8c00);
+            color: black;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Panel de resultados */
+        .resultado-panel {
+            background: linear-gradient(45deg, #0051ff, #43a5eb);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .resultado-panel.visible {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Panel final */
+        .panel-final {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .panel-final.visible {
+            display: flex;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-out;
+        }
+
+        .modal-titulo {
+            color: #0051ff;
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .modal-mensaje {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .encabezado {
+                padding: 0 15px;
+                height: 60px;
+            }
+
+            .game-container {
+                padding: 0 15px;
+                margin: 15px auto;
+            }
+
+            .titulo-juego {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .juego-area {
+                padding: 20px 15px;
+            }
+
+            .estado-juego {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mesa {
+                padding: 20px 15px;
+                min-height: 120px;
+            }
+
+            .ficha {
+                width: 50px;
+                height: 100px;
+            }
+
+            .lado {
+                font-size: 1.5em;
+            }
+
+            .puntos {
+                width: 30px;
+                height: 30px;
+            }
+
+            .punto {
+                width: 4px;
+                height: 4px;
+            }
+
+            .controles {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                justify-content: center;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <header class="encabezado">
+        <div class="marco-icono">
+            <img src="/../assents/imagotipo_cmd@4x.png" alt="Logo" style="width:250px; height:auto;">
+        </div>
+        <a href="/../dashboard.html" class="volver-btn">
+            <i class="bx bx-arrow-back"></i>
+            Volver al Dashboard
+        </a>
+    </header>
+
+    <div class="game-container">
+        <h1 class="titulo-juego">Dominó Educativo</h1>
+
+        <!-- Panel de instrucciones -->
+        <div class="instrucciones-panel" id="instruccionesPanel">
+            <h2 class="instrucciones-titulo">
+                <i class="bx bx-info-circle"></i> ¿Cómo jugar?
+            </h2>
+            <ul class="instrucciones-lista">
+                <li>Cada jugador recibe 7 fichas al inicio del juego</li>
+                <li>El objetivo es quedarse sin fichas antes que la computadora</li>
+                <li>Solo puedes colocar fichas que coincidan con los extremos de la mesa</li>
+                <li>Si no puedes jugar, debes pasar el turno</li>
+                <li>Las fichas que puedes jugar se iluminarán en verde</li>
+                <li>Haz clic en una ficha para colocarla en la mesa</li>
+            </ul>
+        </div>
+
+        <div class="juego-area">
+            <!-- Estado del juego -->
+            <div class="estado-juego">
+                <div class="jugador-info">
+                    <i class="bx bx-user"></i>
+                    <span>Tu turno</span>
+                    <div class="puntuacion" id="fichasJugador">7 fichas</div>
+                </div>
+                <div class="jugador-info">
+                    <i class="bx bx-bot"></i>
+                    <span>Computadora</span>
+                    <div class="puntuacion" id="fichasIA">7 fichas</div>
+                </div>
+            </div>
+
+            <!-- Mesa de juego -->
+            <div class="mesa" id="mesa">
+                <div style="color: rgba(255,255,255,0.7); font-style: italic;">
+                    Selecciona una ficha para comenzar el juego
+                </div>
+            </div>
+
+            <!-- Fichas del jugador -->
+            <div class="fichas-jugador">
+                <div class="fichas-titulo">
+                    <i class="bx bx-games"></i> Tus Fichas
+                </div>
+                <div class="fichas-container" id="tusFichas"></div>
+            </div>
+
+            <!-- Controles -->
+            <div class="controles">
+                <button class="btn btn-primario" onclick="toggleInstrucciones()">
+                    <i class="bx bx-help-circle"></i> Instrucciones
+                </button>
+                <button class="btn btn-warning" onclick="pasarTurno()" id="pasarBtn" disabled>
+                    <i class="bx bx-skip-next"></i> Pasar Turno
+                </button>
+                <button class="btn btn-success" onclick="reiniciarJuego()">
+                    <i class="bx bx-refresh"></i> Nuevo Juego
+                </button>
+            </div>
+
+            <!-- Panel de resultado -->
+            <div class="resultado-panel" id="resultadoPanel">
+                <div id="mensajeResultado"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel final -->
+    <div class="panel-final" id="panelFinal">
+        <div class="modal-content">
+            <div class="modal-emoji" id="modalEmoji">🎉</div>
+            <h2 class="modal-titulo" id="modalTitulo">¡Juego Terminado!</h2>
+            <p class="modal-mensaje" id="modalMensaje">¡Gracias por jugar!</p>
+            <div class="controles">
+                <button class="btn btn-success" onclick="reiniciarJuego()">
+                    <i class="bx bx-refresh"></i> Jugar de Nuevo
+                </button>
+                <a href="/../dashboard.html" class="btn btn-secundario">
+                    <i class="bx bx-home"></i> Volver al Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables del juego
+        let jugador = [];
+        let ia = [];
+        let mesaFichas = [];
+        let turno = 'jugador';
+        let juegoTerminado = false;
+
+        // Generar todas las fichas de dominó
+        function generarFichas() {
+            let todas = [];
+            for (let i = 0; i <= 6; i++) {
+                for (let j = i; j <= 6; j++) {
+                    todas.push([i, j]);
+                }
+            }
+            return todas.sort(() => Math.random() - 0.5);
+        }
+
+        // Crear puntos visuales para las fichas
+        function crearPuntos(valor) {
+            const puntosDiv = document.createElement('div');
+            puntosDiv.className = 'puntos';
+            puntosDiv.setAttribute('data-valor', valor);
+
+            if (valor === 0) return puntosDiv;
+
+            const posiciones = {
+                1: [[1, 1]],
+                2: [[0, 0], [1, 1]],
+                3: [[0, 0], [1, 1], [2, 2]],
+                4: [[0, 0], [0, 1], [1, 0], [1, 1]],
+                5: [[0, 0], [0, 1], [1, 1], [2, 0], [2, 1]],
+                6: [[0, 0], [0, 1], [1, 0], [1, 1], [2, 0], [2, 1]]
+            };
+
+            if (posiciones[valor]) {
+                posiciones[valor].forEach(() => {
+                    const punto = document.createElement('div');
+                    punto.className = 'punto';
+                    puntosDiv.appendChild(punto);
+                });
+            }
+
+            return puntosDiv;
+        }
+
+        // Dibujar una ficha
+        function dibujarFicha(valores, contenedor, clickable = false) {
+            const ficha = document.createElement('div');
+            ficha.classList.add('ficha');
+            ficha.dataset.valores = JSON.stringify(valores);
+
+            const arriba = document.createElement('div');
+            arriba.classList.add('lado');
+            arriba.appendChild(crearPuntos(valores[0]));
+
+            const abajo = document.createElement('div');
+            abajo.classList.add('lado');
+            abajo.appendChild(crearPuntos(valores[1]));
+
+            ficha.appendChild(arriba);
+            ficha.appendChild(abajo);
+
+            if (clickable) {
+                ficha.onclick = () => jugarFicha(valores, ficha);
+            }
+
+            contenedor.appendChild(ficha);
+            return ficha;
+        }
+
+        // Verificar si una ficha se puede jugar
+        function puedeJugar(ficha) {
+            if (mesaFichas.length === 0) return true;
+            
+            const extremoIzq = mesaFichas[0][0];
+            const extremoDer = mesaFichas[mesaFichas.length - 1][1];
+            
+            return ficha[0] === extremoIzq || ficha[1] === extremoIzq || 
+                   ficha[0] === extremoDer || ficha[1] === extremoDer;
+        }
+
+        // Renderizar fichas
+        function renderFichas() {
+            const tusFichasContainer = document.getElementById('tusFichas');
+            tusFichasContainer.innerHTML = '';
+
+            jugador.forEach(ficha => {
+                const fichaElement = dibujarFicha(ficha, tusFichasContainer, true);
+                if (turno === 'jugador' && puedeJugar(ficha)) {
+                    fichaElement.classList.add('jugable');
+                }
+            });
+
+            const mesaContainer = document.getElementById('mesa');
+            if (mesaFichas.length === 0) {
+                mesaContainer.innerHTML = '<div style="color: rgba(255,255,255,0.7); font-style: italic;">Selecciona una ficha para comenzar el juego</div>';
+            } else {
+                mesaContainer.innerHTML = '';
+                mesaFichas.forEach(ficha => dibujarFicha(ficha, mesaContainer, false));
+            }
+
+            // Actualizar contadores
+            document.getElementById('fichasJugador').textContent = `${jugador.length} fichas`;
+            document.getElementById('fichasIA').textContent = `${ia.length} fichas`;
+
+            // Actualizar botón de pasar
+            const pasarBtn = document.getElementById('pasarBtn');
+            const puedeJugarAlgo = jugador.some(ficha => puedeJugar(ficha));
+            pasarBtn.disabled = puedeJugarAlgo || turno !== 'jugador';
+
+            actualizarEstadoJuego();
+        }
+
+        // Actualizar el estado del juego
+        function actualizarEstadoJuego() {
+            const estadoJuego = document.querySelector('.estado-juego');
+            const jugadorInfo = estadoJuego.children[0];
+            const iaInfo = estadoJuego.children[1];
+
+            if (turno === 'jugador') {
+                jugadorInfo.style.background = 'rgba(255, 255, 255, 0.3)';
+                iaInfo.style.background = 'transparent';
+            } else {
+                jugadorInfo.style.background = 'transparent';
+                iaInfo.style.background = 'rgba(255, 255, 255, 0.3)';
+            }
+
+            jugadorInfo.children[1].textContent = turno === 'jugador' ? 'Tu turno' : 'Esperando...';
+            iaInfo.children[1].textContent = turno === 'ia' ? 'Jugando...' : 'Esperando...';
+        }
+
+        // Jugar una ficha
+        function jugarFicha(ficha, fichaElement) {
+            if (turno !== 'jugador' || juegoTerminado || !puedeJugar(ficha)) return;
+
+            // Orientar la ficha correctamente
+            let fichaOrientada = [...ficha];
+            if (mesaFichas.length > 0) {
+                const extremoIzq = mesaFichas[0][0];
+                const extremoDer = mesaFichas[mesaFichas.length - 1][1];
+                
+                if (ficha[0] === extremoDer || ficha[1] === extremoDer) {
+                    // Colocar al final
+                    if (ficha[0] !== extremoDer) {
+                        fichaOrientada = [ficha[1], ficha[0]];
+                    }
+                    mesaFichas.push(fichaOrientada);
+                } else if (ficha[0] === extremoIzq || ficha[1] === extremoIzq) {
+                    // Colocar al inicio
+                    if (ficha[1] !== extremoIzq) {
+                        fichaOrientada = [ficha[1], ficha[0]];
+                    }
+                    mesaFichas.unshift(fichaOrientada);
+                }
+            } else {
+                mesaFichas.push(fichaOrientada);
+            }
+
+            jugador = jugador.filter(f => f !== ficha);
+            
+            if (jugador.length === 0) {
+                terminarJuego('¡Ganaste! 🎉', '¡Excelente! Has terminado todas tus fichas.', '🏆');
+                return;
+            }
+
+            turno = 'ia';
+            renderFichas();
+            
+            setTimeout(jugadaIA, 1500);
+        }
+
+        // Jugada de la IA
+        function jugadaIA() {
+            if (juegoTerminado) return;
+
+            let fichaJugada = false;
+
+            for (let ficha of ia) {
+                if (puedeJugar(ficha)) {
+                    // Orientar la ficha correctamente
+                    let fichaOrientada = [...ficha];
+                    if (mesaFichas.length > 0) {
+                        const extremoIzq = mesaFichas[0][0];
+                        const extremoDer = mesaFichas[mesaFichas.length - 1][1];
+                        
+                        if (ficha[0] === extremoDer || ficha[1] === extremoDer) {
+                            if (ficha[0] !== extremoDer) {
+                                fichaOrientada = [ficha[1], ficha[0]];
+                            }
+                            mesaFichas.push(fichaOrientada);
+                        } else if (ficha[0] === extremoIzq || ficha[1] === extremoIzq) {
+                            if (ficha[1] !== extremoIzq) {
+                                fichaOrientada = [ficha[1], ficha[0]];
+                            }
+                            mesaFichas.unshift(fichaOrientada);
+                        }
+                    } else {
+                        mesaFichas.push(fichaOrientada);
+                    }
+
+                    ia = ia.filter(f => f !== ficha);
+                    fichaJugada = true;
+
+                    if (ia.length === 0) {
+                        terminarJuego('La computadora ganó 😔', 'La computadora terminó todas sus fichas primero.', '🤖');
+                        return;
+                    }
+
+                    mostrarMensaje('La computadora jugó una ficha', 'info');
+                    break;
+                }
+            }
+
+            if (!fichaJugada) {
+                const jugadorPuede = jugador.some(ficha => puedeJugar(ficha));
+                if (!jugadorPuede) {
+                    // Empate
+                    const puntosJugador = jugador.reduce((sum, ficha) => sum + ficha[0] + ficha[1], 0);
+                    const puntosIA = ia.reduce((sum, ficha) => sum + ficha[0] + ficha[1], 0);
+                    
+                    if (puntosJugador < puntosIA) {
+                        terminarJuego('¡Ganaste por puntos! 🎯', `Tus puntos: ${puntosJugador} - Computadora: ${puntosIA}`, '🏆');
+                    } else if (puntosIA < puntosJugador) {
+                        terminarJuego('Perdiste por puntos 😔', `Tus puntos: ${puntosJugador} - Computadora: ${puntosIA}`, '🤖');
+                    } else {
+                        terminarJuego('¡Empate! 🤝', `Ambos tienen ${puntosJugador} puntos`, '🤝');
+                    }
+                    return;
+                } else {
+                    mostrarMensaje('La computadora pasó su turno', 'warning');
+                }
+            }
+
+            turno = 'jugador';
+            renderFichas();
+        }
+
+        // Pasar turno
+        function pasarTurno() {
+            if (turno !== 'jugador' || juegoTerminado) return;
+            
+            mostrarMensaje('Pasaste tu turno', 'warning');
+            turno = 'ia';
+            renderFichas();
+            setTimeout(jugadaIA, 1000);
+        }
+
+        // Mostrar mensaje temporal
+        function mostrarMensaje(mensaje, tipo = 'info') {
+            const panel = document.getElementById('resultadoPanel');
+            const mensajeDiv = document.getElementById('mensajeResultado');
+            
+            mensajeDiv.innerHTML = `<i class="bx bx-info-circle"></i> ${mensaje}`;
+            panel.className = `resultado-panel visible ${tipo}`;
+            
+            setTimeout(() => {
+                panel.classList.remove('visible');
+            }, 2000);
+        }
+
+        // Terminar juego
+        function terminarJuego(titulo, mensaje, emoji) {
+            juegoTerminado = true;
+            document.getElementById('modalEmoji').textContent = emoji;
+            document.getElementById('modalTitulo').textContent = titulo;
+            document.getElementById('modalMensaje').textContent = mensaje;
+            document.getElementById('panelFinal').classList.add('visible');
+        }
+
+        // Reiniciar juego
+        function reiniciarJuego() {
+            const todasLasFichas = generarFichas();
+            jugador = todasLasFichas.slice(0, 7);
+            ia = todasLasFichas.slice(7, 14);
+            mesaFichas = [];
+            turno = 'jugador';
+            juegoTerminado = false;
+            
+            document.getElementById('panelFinal').classList.remove('visible');
+            document.getElementById('resultadoPanel').classList.remove('visible');
+            
+            renderFichas();
+        }
+
+        // Toggle instrucciones
+        function toggleInstrucciones() {
+            const panel = document.getElementById('instruccionesPanel');
+            panel.classList.toggle('visible');
+        }
+
+        // Inicializar juego
+        function iniciarJuego() {
+            reiniciarJuego();
+        }
+
+        // Iniciar cuando la página carga
+        window.addEventListener('DOMContentLoaded', iniciarJuego);
+    </script>
+</body>
+</html>
