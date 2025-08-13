@@ -4,7 +4,7 @@ body {
    background: black;
    overflow-x: hidden;
    font-family: sans-serif;
-   background: url('./assents/Clinica-video-muestra.png') no-repeat center center fixed;
+   background: url('/../assents/fondoclinica.png') no-repeat center center fixed;
    background-size: cover;
 }
 
@@ -89,7 +89,7 @@ body::before {
 
 .card .back {
    border: 3px solid #0051ff;
-   background: url(assents/logo.png) center / contain no-repeat;
+   background: url( /../assents/logo.png  ) center / contain no-repeat;
    background-color: white;
    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
